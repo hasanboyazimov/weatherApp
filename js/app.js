@@ -4,17 +4,16 @@ const details = document.getElementById("details");
 const weatherIcon = document.getElementById("weather-icon");
 const overlay = document.getElementById("overlay");
 
-changeLocation.city.focus()
+changeLocation.city.focus();
 
 // Loader
 const loader = (state) => {
-    if(state) {
-        overlay.classList.remove('d-none')
-    } else {
-        overlay.classList.add('d-none')
-    }
-}
-
+  if (state) {
+    overlay.classList.remove("d-none");
+  } else {
+    overlay.classList.add("d-none");
+  }
+};
 
 //update ui
 const updateUI = (weather) => {
@@ -29,9 +28,10 @@ const updateUI = (weather) => {
   if (card.classList.contains("d-none")) {
     card.classList.remove("d-none");
   }
-
-  weatherIcon.src = `https://openweathermap.org/img/wn/${weather.weather[0].main.icon}@2x.png`
+  weatherIcon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
 };
+
+console.log(weatherIcon);
 
 //get wheather
 const getWeather = async (city) => {
@@ -46,7 +46,8 @@ changeLocation.addEventListener("submit", (e) => {
   changeLocation.reset();
   getWeather(cityName).then((data) => {
     updateUI(data);
-  });
+  }).catch((err) => {
+    throw Error('Something went wrong')
+    details.innerHTML = err.message
+  })
 });
-
-
