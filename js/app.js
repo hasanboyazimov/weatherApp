@@ -35,7 +35,7 @@ const updateUI = (weather) => {
 
 //get wheather
 const getWeather = async (city) => {
-  const data = await getDate(city);
+  const data = await getData(city);
   return data;
 };
 
@@ -48,3 +48,5 @@ changeLocation.addEventListener("submit", (e) => {
     updateUI(data);
   });
 });
+
+
